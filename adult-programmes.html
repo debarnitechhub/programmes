@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Courses — Debarni Tech and Design Hub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #0A2E18;
+    --green-mid: #1A5C32;
+    --green-light: #2A8A50;
+    --orange: #E87E22;
+    --white: #FFFFFF;
+    --cream: #FFF8F0;
+    --gray: #F5F5F5;
+    --text: #1A1A1A;
+    --text-light: #555555;
+  }
+
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+  nav { background: var(--green); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+  .nav-logo { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.85rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--orange); }
+
+  .hero { background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%); padding: 4rem 2rem 3rem; text-align: center; color: var(--white); }
+  .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 0.75rem; }
+  .hero p { font-size: 1rem; opacity: 0.9; max-width: 500px; margin: 0 auto; }
+
+  .programmes { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+  .section-title { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--green); margin-bottom: 3rem; text-align: center; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
+  .card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 25px rgba(0,0,0,0.08); transition: transform 0.3s; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-4px); }
+  .card-header { padding: 2rem; background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%); color: var(--white); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+  .card-header h3 { font-family: 'Sora', sans-serif; font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; }
+  .card-header p { font-size: 0.9rem; opacity: 0.9; }
+  .card-body { padding: 2rem; flex-grow: 1; display: flex; flex-direction: column; }
+  .meta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .meta-item { font-size: 0.75rem; font-weight: 600; color: var(--text-light); background: var(--gray); padding: 0.4rem 0.85rem; border-radius: 6px; }
+  .price { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--green); margin-bottom: 0.25rem; }
+  .price-sub { font-size: 0.8rem; color: var(--text-light); margin-bottom: 1.5rem; }
+  .features { list-style: none; margin-bottom: 1.75rem; flex-grow: 1; }
+  .features li { font-size: 0.85rem; color: var(--text); padding: 0.5rem 0; border-bottom: 1px solid #F0F0F0; display: flex; gap: 8px; }
+  .features li:last-child { border-bottom: none; }
+  .features li::before { content: '✓'; color: var(--green-light); font-weight: 800; flex-shrink: 0; }
+  .btn-enrol { width: 100%; padding: 0.95rem; background: var(--green); color: var(--white); border: none; border-radius: 8px; font-family: 'Sora', sans-serif; font-weight: 700; cursor: pointer; }
+  .btn-enrol:hover { background: var(--green-mid); }
+
+  /* CURRICULUM */
+  .curriculum { background: var(--cream); padding: 4rem 2rem; }
+  .curriculum-title { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--green); text-align: center; margin-bottom: 3rem; }
+  .curriculum-tabs { display: flex; gap: 0.75rem; margin-bottom: 2rem; justify-content: center; flex-wrap: wrap; }
+  .tab-btn { padding: 0.6rem 1.25rem; border-radius: 6px; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 0.8rem; cursor: pointer; border: 2px solid #E0E0E0; background: var(--white); color: var(--text); }
+  .tab-btn.active { background: var(--green); color: var(--white); border-color: var(--green); }
+  .tab-btn:hover { border-color: var(--green); }
+  .curriculum-panel { display: none; max-width: 1100px; margin: 0 auto; }
+  .curriculum-panel.active { display: block; }
+  .weeks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .week-card { background: var(--white); border-radius: 10px; padding: 1.5rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--green-light); }
+  .week-num { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 0.5rem; }
+  .week-title { font-family: 'Sora', sans-serif; font-size: 1.05rem; font-weight: 800; color: var(--green); margin-bottom: 0.75rem; }
+  .week-topics { list-style: none; }
+  .week-topics li { font-size: 0.8rem; color: var(--text-light); padding: 0.35rem 0; padding-left: 1rem; position: relative; }
+  .week-topics li::before { content: '→'; position: absolute; left: 0; color: var(--orange); }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 1000; overflow-y: auto; padding: 20px; }
+  .modal-overlay.active { display: flex; align-items: center; justify-content: center; }
+  .modal-content { background: var(--white); border-radius: 12px; padding: 2rem; max-width: 500px; width: 100%; max-height: 85vh; overflow-y: auto; position: relative; }
+  .modal-close { position: absolute; top: 1.5rem; right: 1.5rem; background: var(--gray); border: none; width: 40px; height: 40px; border-radius: 50%; font-size: 1.5rem; cursor: pointer; }
+  .modal-title { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 800; color: var(--green); margin-bottom: 0.5rem; margin-right: 40px; }
+  .modal-sub { font-size: 0.85rem; color: var(--text-light); margin-bottom: 2rem; }
+  .form-group { margin-bottom: 1.25rem; }
+  .form-group label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--text); margin-bottom: 0.4rem; text-transform: uppercase; }
+  .form-group input, .form-group select { width: 100%; padding: 0.85rem 1rem; border: 1.5px solid #E0E0E0; border-radius: 6px; font-size: 0.9rem; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--green); outline: none; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-actions { display: flex; gap: 1rem; margin-top: 2rem; }
+  .btn-proceed { flex: 1; padding: 0.95rem; background: var(--orange); color: var(--white); border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+  .btn-proceed:hover { background: #D67014; }
+  .btn-cancel { flex: 1; padding: 0.95rem; background: var(--gray); color: var(--text); border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
+
+  .payment-page { display: none; }
+  .payment-page.active { display: block; }
+  .payment-header { background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%); color: var(--white); padding: 2rem; text-align: center; }
+  .payment-header h2 { font-family: 'Sora', sans-serif; font-size: 1.6rem; font-weight: 800; }
+  .summary { background: var(--cream); padding: 1.5rem; margin: 2rem 0; }
+  .summary-item { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #E0E0E0; }
+  .summary-item strong { color: var(--green); }
+  .payment-details { background: var(--white); border: 2px solid var(--orange); padding: 1.5rem; margin: 2rem 0; text-align: center; }
+  .payment-details h3 { font-size: 1.1rem; color: var(--green); margin-bottom: 1rem; }
+  .account-info { background: var(--gray); padding: 1rem; }
+  .account-info strong { color: var(--green); display: block; }
+  .payment-note { background: #FFF3E0; border-left: 4px solid var(--orange); padding: 1rem; font-size: 0.85rem; color: var(--text-light); margin: 2rem 0; }
+  .btn-confirm { width: 100%; padding: 1rem; background: var(--green); color: var(--white); border: none; border-radius: 8px; font-weight: 800; cursor: pointer; }
+  .btn-confirm:hover { background: var(--green-mid); }
+  .btn-back { width: 100%; padding: 0.75rem; background: var(--gray); color: var(--text); border: none; border-radius: 6px; font-weight: 700; cursor: pointer; margin-top: 0.75rem; }
+
+  footer { background: #050F08; padding: 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Debarni <span>Tech Hub</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="kids-programmes.html">Kids Programmes</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Professional Digital Courses</h1>
+  <p>6 programmes designed for career advancement and remote work.</p>
+</section>
+
+<section class="programmes">
+  <h2 class="section-title">Choose Your Course</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">💼</div>
+        <h3>Office Applications</h3>
+        <p>Master Word, Excel, PowerPoint and Google Workspace</p>
+      </div>
+      <div class="card-body">
+        <div class="meta">
+          <div class="meta-item">📅 6 weeks</div>
+          <div class="meta-item">⏰ 3x/week</div>
+          <div class="meta-item">🎓 Certificate</div>
+        </div>
+        <div class="price">₦45,000</div>
+        <p class="price-sub">Payment plans available</p>
+        <ul class="features">
+          <li>Advanced Word and Excel</li>
+          <li>PowerPoint presentations</li>
+          <li>Google Workspace mastery</li>
+          <li>Professional communication</li>
+          <li>Real business projects</li>
+        </ul>
+        <button class="btn-enrol" onclick="openModal('Office Applications', '₦45,000')">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🎨</div>
+        <h3>Graphic Design</h3>
+        <p>Beginner to professional designer with portfolio</p>
+      </div>
+      <div class="card-body">
+        <div class="meta">
+          <div class="meta-item">📅 8 weeks</div>
+          <div class="meta-item">⏰ 3x/week</div>
+          <div class="meta-item">🎓 Certificate</div>
+        </div>
+        <div class="price">₦65,000</div>
+        <p class="price-sub">Payment plans available</p>
+        <ul class="features">
+          <li>Canva for business</li>
+          <li>CorelDraw fundamentals</li>
+          <li>Adobe Photoshop basics</li>
+          <li>Logo and brand design</li>
+          <li>Real portfolio projects</li>
+        </ul>
+        <button class="btn-enrol" onclick="openModal('Graphic Design', '₦65,000')">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">📊</div>
+        <h3>Data Analysis</h3>
+        <p>Turn data into business decisions</p>
+      </div>
+      <div class="card-body">
+        <div class="meta">
+          <div class="meta-item">📅 8 weeks</div>
+          <div class="meta-item">⏰ 3x/week</div>
+          <div class="meta-item">🎓 Certificate</div>
+        </div>
+        <div class="price">₦70,000</div>
+        <p class="price-sub">Payment plans available</p>
+        <ul class="features">
+          <li>Advanced Excel</li>
+          <li>Power BI dashboards</li>
+          <li>Data visualisation</li>
+          <li>Real datasets</li>
+          <li>Professional reporting</li>
+        </ul>
+        <button class="btn-enrol" onclick="openModal('Data Analysis', '₦70,000')">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🔒</div>
+        <h3>Cyber Security</h3>
+        <p>Protect yourself and your business online</p>
+      </div>
+      <div class="card-body">
+        <div class="meta">
+          <div class="meta-item">📅 5 weeks</div>
+          <div class="meta-item">⏰ 3x/week</div>
+          <div class="meta-item">🎓 Certificate</div>
+        </div>
+        <div class="price">₦50,000</div>
+        <p class="price-sub">Payment plans available</p>
+        <ul class="features">
+          <li>Cyber threats</li>
+          <li>Account security</li>
+          <li>Business protection</li>
+          <li>Phishing prevention</li>
+          <li>Career paths</li>
+        </ul>
+        <button class="btn-enrol" onclick="openModal('Cyber Security', '₦50,000')">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🌍</div>
+        <h3>Virtual Assistant</h3>
+        <p>Work remotely and earn in dollars</p>
+      </div>
+      <div class="card-body">
+        <div class="meta">
+          <div class="meta-item">📅 6 weeks</div>
+          <div class="meta-item">⏰ 3x/week</div>
+          <div class="meta-item">🎓 Certificate</div>
+        </div>
+        <div class="price">₦55,000</div>
+        <p class="price-sub">Payment plans available</p>
+        <ul class="features">
+          <li>VA tools and platforms</li>
+          <li>Admin management</li>
+          <li>Find clients on Upwork</li>
+          <li>Social media VA skills</li>
+          <li>Earn within 30 days</li>
+        </ul>
+        <button class="btn-enrol" onclick="openModal('Virtual Assistant', '₦55,000')">Enrol Now</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">💻</div>
+        <h3>Web Development</h3>
+        <p>Build websites from scratch</p>
+      </div>
+      <div class="card-body">
+        <div class="meta">
+          <div class="meta-item">📅 10 weeks</div>
+          <div class="meta-item">⏰ 3x/week</div>
+          <div class="meta-item">🎓 Certificate</div>
+        </div>
+        <div class="price">₦80,000</div>
+        <p class="price-sub">Payment plans available</p>
+        <ul class="features">
+          <li>HTML, CSS, JavaScript</li>
+          <li>Responsive design</li>
+          <li>Real projects</li>
+          <li>Portfolio launch</li>
+          <li>Freelance ready</li>
+        </ul>
+        <button class="btn-enrol" onclick="openModal('Web Development', '₦80,000')">Enrol Now</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="curriculum">
+  <h2 class="curriculum-title">Full Curriculum — What You'll Learn</h2>
+  
+  <div class="curriculum-tabs">
+    <button class="tab-btn active" onclick="showCurrTab('office', this)">💼 Office</button>
+    <button class="tab-btn" onclick="showCurrTab('design', this)">🎨 Design</button>
+    <button class="tab-btn" onclick="showCurrTab('data', this)">📊 Data</button>
+    <button class="tab-btn" onclick="showCurrTab('cyber', this)">🔒 Security</button>
+    <button class="tab-btn" onclick="showCurrTab('va', this)">🌍 VA</button>
+    <button class="tab-btn" onclick="showCurrTab('web', this)">💻 Web</button>
+  </div>
+
+  <div class="curriculum-panel active" id="panel-office">
+    <div class="weeks-grid">
+      <div class="week-card"><div class="week-num">Weeks 1-2</div><div class="week-title">Office Mastery</div><ul class="week-topics"><li>Word professional documents</li><li>Excel formulas and analysis</li><li>PowerPoint presentations</li><li>Google Workspace setup</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 3-4</div><div class="week-title">Digital Communication</div><ul class="week-topics"><li>Gmail mastery</li><li>Zoom and Teams</li><li>Cloud storage sharing</li><li>Online research</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 5-6</div><div class="week-title">Final Projects</div><ul class="week-topics"><li>Document systems</li><li>Professional templates</li><li>Portfolio project</li><li>Certificate</li></ul></div>
+    </div>
+  </div>
+
+  <div class="curriculum-panel" id="panel-design">
+    <div class="weeks-grid">
+      <div class="week-card"><div class="week-num">Week 1</div><div class="week-title">Design Fundamentals</div><ul class="week-topics"><li>Colour theory</li><li>Typography</li><li>Layout principles</li><li>Industry standards</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 2</div><div class="week-title">Canva for Business</div><ul class="week-topics"><li>Social media graphics</li><li>Brand kits</li><li>Flyers and posters</li><li>Templates</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 3-4</div><div class="week-title">CorelDraw Essentials</div><ul class="week-topics"><li>Vector design</li><li>Logo creation</li><li>Business cards</li><li>Print files</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 5</div><div class="week-title">Adobe Photoshop</div><ul class="week-topics"><li>Photo editing</li><li>Background removal</li><li>Digital visuals</li><li>Effects</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 6</div><div class="week-title">Brand Identity</div><ul class="week-topics"><li>Logo design</li><li>Colour palettes</li><li>Brand guidelines</li><li>Portfolio</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 7-8</div><div class="week-title">Freelancing</div><ul class="week-topics"><li>Portfolio building</li><li>Pricing services</li><li>Getting clients</li><li>Certificate</li></ul></div>
+    </div>
+  </div>
+
+  <div class="curriculum-panel" id="panel-data">
+    <div class="weeks-grid">
+      <div class="week-card"><div class="week-num">Weeks 1-2</div><div class="week-title">Excel Data Analysis</div><ul class="week-topics"><li>Advanced formulas</li><li>Pivot tables</li><li>Charts</li><li>Real datasets</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 3-4</div><div class="week-title">Google Sheets</div><ul class="week-topics"><li>Collaborative data</li><li>QUERY functions</li><li>Data cleaning</li><li>Automated reports</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 5-6</div><div class="week-title">Power BI</div><ul class="week-topics"><li>Data import</li><li>Dashboards</li><li>Reports</li><li>Business intelligence</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 7</div><div class="week-title">AI Tools</div><ul class="week-topics"><li>ChatGPT analysis</li><li>Automating reports</li><li>Data decisions</li><li>Predictive analytics</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 8</div><div class="week-title">Final Project</div><ul class="week-topics"><li>Dataset analysis</li><li>Dashboard building</li><li>Presentation</li><li>Certificate</li></ul></div>
+    </div>
+  </div>
+
+  <div class="curriculum-panel" id="panel-cyber">
+    <div class="weeks-grid">
+      <div class="week-card"><div class="week-num">Week 1</div><div class="week-title">Security Foundations</div><ul class="week-topics"><li>Cyber threats</li><li>How hackers work</li><li>Case studies</li><li>Risk assessment</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 2</div><div class="week-title">Personal Protection</div><ul class="week-topics"><li>Strong passwords</li><li>Two-factor auth</li><li>Email security</li><li>Phishing</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 3</div><div class="week-title">Business Protection</div><ul class="week-topics"><li>Secure accounts</li><li>Data protection</li><li>File storage</li><li>Network security</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 4</div><div class="week-title">Digital Safety</div><ul class="week-topics"><li>Safe habits</li><li>VPN usage</li><li>Mobile security</li><li>Scam prevention</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 5</div><div class="week-title">Career Paths</div><ul class="week-topics"><li>Security roles</li><li>Certifications</li><li>Assessment</li><li>Certificate</li></ul></div>
+    </div>
+  </div>
+
+  <div class="curriculum-panel" id="panel-va">
+    <div class="weeks-grid">
+      <div class="week-card"><div class="week-num">Week 1</div><div class="week-title">VA Foundations</div><ul class="week-topics"><li>What VAs do</li><li>Workspace setup</li><li>Communication</li><li>Time management</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 2</div><div class="week-title">VA Tools</div><ul class="week-topics"><li>Google and Microsoft</li><li>Zoom, Slack, Teams</li><li>Trello, Asana</li><li>Invoicing tools</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 3</div><div class="week-title">Admin Support</div><ul class="week-topics"><li>Calendar management</li><li>Document creation</li><li>Online research</li><li>File systems</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 4</div><div class="week-title">Social Media VA</div><ul class="week-topics"><li>Managing accounts</li><li>Content creation</li><li>Meta Business Suite</li><li>Analytics</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 5</div><div class="week-title">Finding Clients</div><ul class="week-topics"><li>Upwork setup</li><li>Winning proposals</li><li>Pricing</li><li>Contracts</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 6</div><div class="week-title">AI and Career</div><ul class="week-topics"><li>ChatGPT productivity</li><li>Automating tasks</li><li>VA branding</li><li>Certificate</li></ul></div>
+    </div>
+  </div>
+
+  <div class="curriculum-panel" id="panel-web">
+    <div class="weeks-grid">
+      <div class="week-card"><div class="week-num">Weeks 1-2</div><div class="week-title">HTML Foundations</div><ul class="week-topics"><li>How websites work</li><li>HTML tags</li><li>Building pages</li><li>Semantic HTML</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 3-4</div><div class="week-title">CSS Styling</div><ul class="week-topics"><li>Colours and fonts</li><li>Flexbox</li><li>Responsive design</li><li>Mobile-first</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 5-6</div><div class="week-title">JavaScript</div><ul class="week-topics"><li>Variables and functions</li><li>Interactive sites</li><li>DOM manipulation</li><li>Event handling</li></ul></div>
+      <div class="week-card"><div class="week-num">Weeks 7-8</div><div class="week-title">Real Projects</div><ul class="week-topics"><li>Portfolio website</li><li>Landing page</li><li>Complete build</li><li>AI coding</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 9</div><div class="week-title">Hosting</div><ul class="week-topics"><li>Domains</li><li>Hosting basics</li><li>Deploying sites</li><li>Maintenance</li></ul></div>
+      <div class="week-card"><div class="week-num">Week 10</div><div class="week-title">Freelancing</div><ul class="week-topics"><li>Finding clients</li><li>Pricing</li><li>Portfolio</li><li>Certificate</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    
+    <div id="formPage">
+      <div class="modal-title">Enrol in a Course</div>
+      <p class="modal-sub">Fill in your details. We'll contact you within 24 hours.</p>
+
+      <div class="form-group">
+        <label>Your Full Name *</label>
+        <input type="text" id="name" placeholder="Full name">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Phone (WhatsApp) *</label>
+          <input type="tel" id="phone" placeholder="08012345678">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="your@email.com">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Learning Mode *</label>
+        <select id="learningMode">
+          <option value="">Select mode</option>
+          <option value="Physical (Benin City)">Physical — In Benin City</option>
+          <option value="Online (Zoom)">Online — Live Zoom Classes</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn-proceed" onclick="proceedToPayment()">Proceed to Payment →</button>
+        <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      </div>
+    </div>
+
+    <div id="paymentPage" class="payment-page">
+      <div class="payment-header">
+        <h2>Complete Your Enrolment</h2>
+        <p>Review and proceed to payment</p>
+      </div>
+
+      <div class="summary">
+        <div class="summary-item">
+          <span>Your Name:</span>
+          <strong id="summaryName">—</strong>
+        </div>
+        <div class="summary-item">
+          <span>Course:</span>
+          <strong id="summaryCourse">—</strong>
+        </div>
+        <div class="summary-item">
+          <span>Amount:</span>
+          <strong id="summaryPrice">—</strong>
+        </div>
+        <div class="summary-item">
+          <span>Contact:</span>
+          <strong id="summaryContact">—</strong>
+        </div>
+      </div>
+
+      <div class="payment-details">
+        <h3>💳 Pay to the Following Account</h3>
+        <div class="account-info">
+          <strong>Opay Bank</strong>
+          <p><strong style="font-size: 1.1rem;">6113980753</strong></p>
+          <p><strong>Account Name:</strong> Debarni Tech and Design Hub</p>
+        </div>
+      </div>
+
+      <div class="payment-note">
+        <strong>📝 Important:</strong> Once you make the payment, click "Confirm & Send to WhatsApp" to notify us. We will contact you within 24 hours to confirm your course start date.
+      </div>
+
+      <button class="btn-confirm" onclick="sendToWhatsApp()">✅ Confirm & Send to WhatsApp</button>
+      <button class="btn-back" onclick="backToForm()">← Back to Form</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Debarni Tech and Design Hub. All rights reserved.</p>
+  <p>📞 +234 906 706 4555 | 📧 debarnitechhub@gmail.com</p>
+</footer>
+
+<script>
+  let selectedCourse = '';
+  let selectedPrice = '';
+
+  function openModal(course, price) {
+    selectedCourse = course;
+    selectedPrice = price;
+    document.getElementById('modal').classList.add('active');
+    document.getElementById('formPage').style.display = 'block';
+    document.getElementById('paymentPage').classList.remove('active');
+  }
+
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+
+  function proceedToPayment() {
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const learningMode = document.getElementById('learningMode').value;
+
+    if (!name || !phone || !learningMode) {
+      alert('Please fill all required fields.');
+      return;
+    }
+
+    document.getElementById('formPage').style.display = 'none';
+    document.getElementById('paymentPage').classList.add('active');
+
+    document.getElementById('summaryName').textContent = name;
+    document.getElementById('summaryCourse').textContent = selectedCourse;
+    document.getElementById('summaryPrice').textContent = selectedPrice;
+    document.getElementById('summaryContact').textContent = phone;
+  }
+
+  function backToForm() {
+    document.getElementById('formPage').style.display = 'block';
+    document.getElementById('paymentPage').classList.remove('active');
+  }
+
+  function sendToWhatsApp() {
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const email = document.getElementById('email').value || 'Not provided';
+    const learningMode = document.getElementById('learningMode').value;
+
+    const message = `Hello Debarni Tech Hub! 👋
+
+I would like to enrol in the ${selectedCourse} course.
+
+*My Details:*
+Name: ${name}
+Phone: ${phone}
+Email: ${email}
+Learning Mode: ${learningMode}
+
+*Payment Details:*
+Course: ${selectedCourse}
+Amount: ${selectedPrice}
+Bank: Opay Bank
+Account: 6113980753
+Account Name: Debarni Tech and Design Hub
+
+I have made the payment. Please confirm my enrolment.
+
+Thank you!`;
+
+    const whatsappURL = `https://wa.me/2349067064555?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+    
+    alert('WhatsApp opened! Send the message to confirm your enrolment.');
+    closeModal();
+  }
+
+  function showCurrTab(tab, btn) {
+    document.querySelectorAll('.curriculum-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+
+</body>
+</html>
