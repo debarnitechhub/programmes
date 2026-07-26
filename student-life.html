@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Life — Debarni Tech and Design Hub</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #0A2E18;
+    --green-mid: #1A5C32;
+    --green-light: #2A8A50;
+    --orange: #E87E22;
+    --white: #FFFFFF;
+    --cream: #FFF8F0;
+    --gray: #F5F5F5;
+    --text: #1A1A1A;
+    --text-light: #555555;
+  }
+
+  body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); }
+
+  nav { background: var(--green); padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+  .nav-logo { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 1rem; color: var(--white); }
+  .nav-logo span { color: var(--orange); }
+  .nav-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.8rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--orange); }
+
+  .hero { background: linear-gradient(135deg, var(--green) 0%, var(--green-mid) 100%); padding: 4rem 2rem 3rem; text-align: center; color: var(--white); }
+  .hero h1 { font-family: 'Sora', sans-serif; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; margin-bottom: 0.75rem; }
+  .hero p { font-size: 1rem; opacity: 0.9; max-width: 500px; margin: 0 auto; }
+
+  .section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-title { font-family: 'Sora', sans-serif; font-size: 1.8rem; font-weight: 800; color: var(--green); margin-bottom: 3rem; text-align: center; }
+  .section-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--orange); margin-bottom: 1rem; }
+
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+  .feature-card { background: var(--cream); padding: 2.5rem 2rem; border-radius: 12px; border-left: 4px solid var(--orange); }
+  .feature-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+  .feature-card h3 { font-family: 'Sora', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--green); margin-bottom: 0.75rem; }
+  .feature-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.6; }
+
+  .testimonials { background: var(--cream); padding: 4rem 2rem; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
+  .testimonial-card { background: var(--white); padding: 2rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .testimonial-stars { color: var(--orange); font-size: 1rem; margin-bottom: 1rem; }
+  .testimonial-text { font-size: 0.95rem; color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; font-style: italic; }
+  .testimonial-author { font-weight: 700; color: var(--green); font-size: 0.95rem; }
+  .testimonial-role { font-size: 0.8rem; color: var(--text-light); }
+
+  footer { background: #050F08; padding: 2rem; text-align: center; color: rgba(255,255,255,0.4); font-size: 0.8rem; }
+
+  @media (max-width: 768px) {
+    .nav-links { gap: 1rem; }
+    .nav-links a { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Debarni <span>Tech Hub</span></a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="student-life.html">Student Life</a>
+    <a href="index.html#courses">Courses</a>
+    <a href="fees-funding.html">Fees & Funding</a>
+    <a href="international.html">International</a>
+    <a href="find-out-more.html">Find Out More</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <h1>Student Life at Debarni</h1>
+  <p>A safe, supportive learning environment where every child thrives and professionals grow.</p>
+</section>
+
+<section class="section">
+  <div class="section-label">What to expect</div>
+  <h2 class="section-title">A Safe, Supportive Environment</h2>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>Safe & Secure</h3>
+      <p>Professional instructors. Verified background. Small class sizes. Parents know exactly where their children are and what they're learning.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">👥</div>
+      <h3>Supportive Community</h3>
+      <p>Diverse cohorts from different schools. Students make friends while learning. A real community, not just a classroom.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">📈</div>
+      <h3>Real Progress Tracked</h3>
+      <p>Weekly updates to parents. See what your child built. Portfolio projects you can be proud of. Not just grades — real skills.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Mentorship, Not Just Teaching</h3>
+      <p>Learn from someone who's actually working in the field. Get advice for school, careers, and navigating tech confidently.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">🏆</div>
+      <h3>Certificate That Matters</h3>
+      <p>When they graduate, they leave with a real portfolio and a certificate recognizing actual skills learned. No participation trophies here.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon">💡</div>
+      <h3>Future-Ready Skills</h3>
+      <p>AI tools. Real projects. Collaboration. Problem-solving. The skills that matter in 2026 and beyond — not outdated theory.</p>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials">
+  <div class="section-label" style="text-align: center;">What parents and students say</div>
+  <h2 class="section-title">Testimonials</h2>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"My son came home excited to code. He's never been interested in tech before, but Barni made it feel real and achievable. He built his first game in week 3. I was blown away."</div>
+      <div class="testimonial-author">Chioma M.</div>
+      <div class="testimonial-role">Parent, Junior Tech Stars</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"This isn't just a coding class. Barni talks about jobs, freelancing, earning money. My daughter actually understands why these skills matter. She's talking about starting her own design business."</div>
+      <div class="testimonial-author">Tunde O.</div>
+      <div class="testimonial-role">Parent, Digital Skills Accelerator</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"The curriculum is clear. There's real progress. My son can explain what he learned to me. That matters way more than just being entertained for 4 weeks."</div>
+      <div class="testimonial-author">Blessing A.</div>
+      <div class="testimonial-role">Parent, Kids Programme</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"I took the Virtual Assistant course. Within 3 weeks, I landed my first client on Upwork. The practical training actually works. Not theory, real money."</div>
+      <div class="testimonial-author">Zainab T.</div>
+      <div class="testimonial-role">Professional Course Graduate</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"Learned graphic design in 6 weeks and already building a portfolio. Never thought this was possible. Barni knows the industry and teaches what actually works."</div>
+      <div class="testimonial-author">Ikechukwu M.</div>
+      <div class="testimonial-role">Professional Course Graduate</div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">"The community here is real. We're not competing with each other; we're lifting each other up. Best learning experience I've had."</div>
+      <div class="testimonial-author">Folake A.</div>
+      <div class="testimonial-role">Digital Skills Accelerator Graduate</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© Debarni Tech and Design Hub. All rights reserved.</p>
+  <p>📞 +234 906 706 4555 | 📧 debarnitechhub@gmail.com</p>
+</footer>
+
+</body>
+</html>
