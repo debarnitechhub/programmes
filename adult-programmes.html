@@ -110,6 +110,13 @@
   .nav-links { transition: max-height 0.3s ease; }
   .nav-links.hidden { max-height: 0; overflow: hidden; }
 
+  /* Desktop: Show nav links, hide hamburger */
+  @media (min-width: 769px) {
+    .hamburger { display: none !important; }
+    .nav-links { display: flex !important; gap: 2rem; max-height: none !important; overflow: visible !important; width: auto; padding: 0 !important; order: auto; }
+    .nav-links.hidden { max-height: none !important; }
+  }
+
   @media (max-width: 768px) {
     .hamburger { display: block; }
     nav { flex-wrap: wrap; }
@@ -464,10 +471,17 @@
       </div>
 
       <div class="payment-note">
-        <strong>📝 Important:</strong> Once you make the payment, click "Confirm & Send to WhatsApp" to notify us. We will contact you within 24 hours to confirm your course start date.
+        <strong>📝 Steps to Complete Enrollment:</strong><br>
+        1️⃣ Make payment to Opay: <strong>6113980753</strong><br>
+        2️⃣ Click the button below to fill your enrollment form<br>
+        3️⃣ At the end of the form, confirm via WhatsApp
       </div>
 
-      <button class="btn-confirm" onclick="sendToWhatsApp()">✅ Confirm & Send to WhatsApp</button>
+      <div style="background: #FFF8F0; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+        <p style="font-size: 0.95rem; color: #555; margin-bottom: 1.5rem;">After payment, complete your enrollment form:</p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSd55dbHy30Y6i51BfVVNFoyzu7-7GxcR_IJa54DwnWoOtZhbQ/viewform" target="_blank" style="display: inline-block; padding: 1rem 2rem; background: #0A2E18; color: white; text-decoration: none; border-radius: 8px; font-weight: 700; font-size: 1rem;">📋 Complete Enrollment Form</a>
+      </div>
+
       <button class="btn-back" onclick="backToForm()">← Back to Form</button>
     </div>
   </div>
